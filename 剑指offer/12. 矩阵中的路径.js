@@ -48,13 +48,10 @@ var exist = function (board, word) {
 
 function findChar(x, y, index) {
     let key = `x${x}y${y}`
-    if(x<0 || x>=boardMatrix.length) return false
-    if(y<0 || y>=boardMatrix[x].length )return false
+    if(x<0 || x>=boardMatrix.length || y<0 || y>=boardMatrix[x].length || map[key] || boardMatrix[x][y] != wordRes[index]) return false
     //console.log(x,y,boardMatrix[x][y],word[index] )
     //console.log(x,y, boardMatrix[x][y] )
-    //此节点已使用过
-    if(map[key]) return false
-    if(boardMatrix[x][y] == wordRes[index]){
+   
         if(index == wordRes.length-1) return true
         index++
         map[key] = 1
@@ -64,7 +61,7 @@ function findChar(x, y, index) {
         if(findChar(x,y-1,index)) {console.log(4); return true}
         map[key] = 0
         index--
-    }
+    
     return false
 }
 
