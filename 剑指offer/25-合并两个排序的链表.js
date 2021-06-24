@@ -33,34 +33,18 @@
 */
 
 var mergeTwoLists = function (l1, l2) {
-    return pushList(null, l1, l2)
-
-};
-
-function pushNode(list, val) {
-    if (!list && (!val && val != 0)) return null
-    if (!list) return { val, next: null }
-    if (!val && val != 0) return list
-    let node = list
-    while (node.next) {
-        node = node.next
-    }
-    node.next = { val, next: null }
-    return list
-}
-function pushList(list, l1, l2) {
-    //console.log(l1,l2,list)
-    if (!l1 && !l2) return list
-    if (l1 && (!l2 || l1.val < l2.val)) {
-        list = pushNode(list, l1.val)
-        l1 = l1.next
-        list = pushList(list, l1, l2)
-    } else {
-        if (l2 && (!l1 || l1.val >= l2.val)) {
-            list = pushNode(list, l2.val)
+    let res = {val:null,next:null}
+    let tmp = res
+    while(l1&&l2){
+        if(l1.val < l2.val){
+            tmp.next = l1
+            l1 = l1.next 
+        }else{
+            tmp.next = l2
             l2 = l2.next
-            list = pushList(list, l1, l2)
         }
+        tmp= tmp.next
     }
-    return list
-}
+    tmp.next = l1 ? l1:l2
+    return res.next
+};
