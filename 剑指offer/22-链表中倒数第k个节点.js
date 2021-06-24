@@ -8,7 +8,10 @@
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+--------------------------------------------------------------
+题解:用快慢指针或者一个递归就ok，递归会快一点
 */
+
 
 /**
  * Definition for singly-linked list.
@@ -23,6 +26,7 @@
  * @return {ListNode}
  */
  let index = -1
+ //正常递归,耗时88ms
  var getKthFromEnd = function(head, k) {
      index = -1
      return getValue(head,k)
@@ -40,3 +44,18 @@ function getValue(head,k){
         index ++
         return val
 }
+
+//快慢指针，耗时112ms
+var getKthFromEnd_qs = function(head, k) {
+    let a,b =head
+  let q,s = 0
+  while(a.next){
+      q++
+      a = a.next
+      if(q>=k){
+          s ++
+          b=b.next
+      }
+  }
+  return b 
+};
